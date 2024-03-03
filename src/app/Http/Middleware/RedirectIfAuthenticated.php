@@ -23,7 +23,10 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 if(($guard === 'admins') && $request->routeIs('admin.*')) {
                     return redirect(RouteServiceProvider::ADMIN_HOME);
+                } elseif(($guard === 'owners') && $request->routeIs('owner.*')) {
+                    return redirect(RouteServiceProvider::OWNER_HOME);
                 }
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }

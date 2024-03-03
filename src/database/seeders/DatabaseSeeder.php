@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         // Event::factory(100)->create();
         $this->call([
             UserSeeder::class,
+            OwnerSeeder::class,
             AdminSeeder::class,
         ]);
     }
