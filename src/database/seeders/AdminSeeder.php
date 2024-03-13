@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'email' => 'tada950918@gmail.com',
             'password' => Hash::make('tada950918'),
+            "created_at" => "2024/01/01 11:11:11",
         ]);
     }
 }

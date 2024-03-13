@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Owner\ProfileController;
+use App\Http\Controllers\Owner\RestaurantController;
 use App\Http\Controllers\Owner\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Owner\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Owner\Auth\EmailVerificationNotificationController;
@@ -13,10 +14,10 @@ use App\Http\Controllers\Owner\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+    //             ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    // Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
@@ -36,15 +37,21 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
 
-Route::get('/', function () {
-    return view('owner.welcome');
-});
+// Route::get('/', function () {
+//     return view('owner.welcome');
+// });
 
 Route::middleware('auth:owners')->group(function () {
 
     Route::get('dashboard', function () {
         return view('owner.dashboard');
     })->middleware('verified')->name('dashboard');
+
+    Route::prefix('restaurant')->name('restaurant.')->controller(RestaurantController::class)->group(function() {
+      Route::get('/', 'index')->name('index');
+      Route::get('/edit', 'edit')->name('edit');
+      Route::put('/update', 'update')->name('update');
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

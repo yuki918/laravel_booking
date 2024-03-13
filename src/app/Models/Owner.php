@@ -48,4 +48,9 @@ class Owner extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function RestaurantInfo()
+    {
+        return $this->hasOne(RestaurantInfo::class);
+    }
 }

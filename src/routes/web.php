@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('user.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('/')->name('restaurant.')->controller(RestaurantController::class)->group(function() {
+  Route::get('/', 'index')->name('index');
+  Route::get('/restaurants/{id}', 'show')->name('show');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

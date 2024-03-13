@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             OwnerSeeder::class,
             AdminSeeder::class,
+            RestaurantInfoSeeder::class,
         ]);
     }
 }
